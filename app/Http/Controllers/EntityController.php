@@ -239,6 +239,7 @@ public function ibcentitykycupdate(Request $request)
 
     ]);
    }
+   
      //001
    if($request->hasFile('addressproof') && $request->idproof=='' && $request->businessproof=='')
    {
