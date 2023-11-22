@@ -5,7 +5,7 @@
   <div class="container">
     <div class="slim-pageheader">
       <ol class="breadcrumb slim-breadcrumb">
-        <li class="breadcrumb-item"><a href="{{url('dashboard')}}">Home</a></li>
+        <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
         <li class="breadcrumb-item"><a href="#">IBC Voting
 
           </a></li>
@@ -29,7 +29,7 @@
 
       $.ajax({
         type: "GET",
-        url: 'api/view_ibcresolution',
+        url: '{{route("view_ibcresolution")}}',
         data: {
           entityid: $("#entityid").val(),
           mobno: $("#mobno").val()

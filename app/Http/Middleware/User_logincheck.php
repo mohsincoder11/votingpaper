@@ -16,8 +16,7 @@ class User_logincheck
      */
     public function handle($request, Closure $next)
     {
-        $data = Session::get('app_userdata');
-        if ($data != null) {
+        if (auth()->check()) {
             return $next($request);
         } else {
             return redirect()->route('user_login');

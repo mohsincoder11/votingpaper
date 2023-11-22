@@ -160,7 +160,7 @@
 
   $(document).ready(function()
   {
-    var position_id_array = <?php echo json_encode($position_id_array); ?>;
+    var position_id_array = @php echo json_encode($position_id_array); @endphp;
   //console.log(position_id_array);
 
 
@@ -236,7 +236,6 @@
     $.ajax({
       type: "POST",
       url: '{{route("insert_election_ans")}}',
-  //  url: 'http://localhost/votingpaper/api/insert_election_ans',
     data: {
       election_ans:ans_array
     },
@@ -258,7 +257,7 @@
 
     $.ajax({
       type: "POST",
-      url: '/votingpaper/api/insert_election_ans',
+      url: '{{route("insert_election_ans")}}',
       data: {
         election_ans:ans_array3,ballottype:ballottype,
       },

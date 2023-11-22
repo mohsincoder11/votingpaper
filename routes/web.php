@@ -12,16 +12,24 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/clear-cache', function () {
+	Artisan::call('cache:clear');
+	Artisan::call('route:clear');
+	Artisan::call('config:clear');
+	Artisan::call('view:clear');
+	return redirect()->back();
+	//return "All cache cleared!";
+});
 //Admin
-Route::get('/', 'Admin@login')->name('login');
-Route::get('checklogin', 'Admin@checklogin')->name('checklogin');
+Route::view('/', 'login')->name('login');
+Route::get('checklogin', 'AdminController@checklogin')->name('checklogin');
 
 Route::group(['middleware' => ['Admin_logincheck']], function () {
-    Route::get('dashboard', 'Admin@dashboard')->name('dashboard');
-    Route::get('usermanage', 'Admin@usermanage')->name('usermanage');
-    Route::get('notification', 'Admin@notification')->name('notification');
-    Route::get('send_notification', 'Admin@send_notification')->name('send_notification');
-    Route::get('get_user_byentity', 'Admin@get_user_byentity')->name('get_user_byentity');
+    Route::get('dashboard', 'AdminController@dashboard')->name('dashboard');
+    Route::get('usermanage', 'AdminController@usermanage')->name('usermanage');
+    Route::get('notification', 'AdminController@notification')->name('notification');
+    Route::get('send_notification', 'AdminController@send_notification')->name('send_notification');
+    Route::get('get_user_byentity', 'AdminController@get_user_byentity')->name('get_user_byentity');
     
     //election
     Route::get('addelection', 'ElectionController@addelection')->name('addelection');
@@ -30,7 +38,7 @@ Route::group(['middleware' => ['Admin_logincheck']], function () {
     Route::get('election_result', 'ElectionController@election_result')->name('election_result');
     Route::get('view_election_list', 'ElectionController@view_election_list')->name('view_election_list');
     Route::get('view_election_result/{election_id}', 'ElectionController@view_election_result')->name('view_election_result');
-    Route::get('live_election', 'ElectionController@live_election')->name('live_election');;
+    Route::get('live-election', 'ElectionController@live_election')->name('live_election');;
 
     //entity
     Route::get('addentity', 'EntityController@addentity')->name('addentity');
@@ -56,20 +64,20 @@ Route::group(['middleware' => ['Admin_logincheck']], function () {
 
 });
 
-Route::get('get_all_adminnotification', 'Admin@get_all_adminnotification')->name('get_all_adminnotification');
-Route::get('delete_notification', 'Admin@delete_notification')->name('delete_notification');
-Route::get('get_single_notification', 'Admin@get_single_notification')->name('get_single_notification');
-Route::get('delete_single_notification', 'Admin@delete_single_notification')->name('delete_single_notification');
-Route::get('edit_notification', 'Admin@edit_notification')->name('edit_notification');
+Route::get('get_all_adminnotification', 'AdminController@get_all_adminnotification')->name('get_all_adminnotification');
+Route::get('delete_notification', 'AdminController@delete_notification')->name('delete_notification');
+Route::get('get_single_notification', 'AdminController@get_single_notification')->name('get_single_notification');
+Route::get('delete_single_notification', 'AdminController@delete_single_notification')->name('delete_single_notification');
+Route::get('edit_notification', 'AdminController@edit_notification')->name('edit_notification');
 
 
-Route::get('addusermanage', 'Admin@addusermanage')->name('addusermanage');
-Route::get('updateusermanage', 'Admin@updateusermanage')->name('updateusermanage');
-Route::get('getalluser', 'Admin@getalluser')->name('getalluser');
-Route::get('editusermanage', 'Admin@editusermanage')->name('editusermanage');
-Route::get('deleteusermanage', 'Admin@deleteusermanage')->name('deleteusermanage');
-Route::get('checkusername', 'Admin@checkusername')->name('checkusername');
-Route::get('signout', 'Admin@signout')->name('signout');
+Route::get('addusermanage', 'AdminController@addusermanage')->name('addusermanage');
+Route::get('updateusermanage', 'AdminController@updateusermanage')->name('updateusermanage');
+Route::get('getalluser', 'AdminController@getalluser')->name('getalluser');
+Route::get('editusermanage', 'AdminController@editusermanage')->name('editusermanage');
+Route::get('deleteusermanage', 'AdminController@deleteusermanage')->name('deleteusermanage');
+Route::get('checkusername', 'AdminController@checkusername')->name('checkusername');
+Route::get('signout', 'AdminController@signout')->name('signout');
 //Registration
 Route::get('registration', 'RegistrationController@registration')->name('registration');
 Route::post('register', 'RegistrationController@register')->name('register');
@@ -175,21 +183,21 @@ Route::get('get_survey_describeans', 'SurveyController@get_survey_describeans')-
 
 //user Part
 Route::group(['middleware' => ['User_logincheck']], function () {
-    Route::get('user_dashboard', 'Api_controller@user_dashboard')->name('user_dashboard');
+    Route::get('user-dashboard', 'Api_controller@user_dashboard')->name('user_dashboard');
     Route::get('addelectionvoting/{id}/{user_id}', 'Api_controller@addelectionvoting')->name('addelectionvoting');
     Route::get('electiondetails', 'Api_controller@electiondetails')->name('electiondetails');
     Route::get('addibcvoting/{id}/{user_id}', 'Api_controller@addibcvoting')->name('addibcvoting');
     Route::get('ibcdetails', 'Api_controller@ibcdetails')->name('ibcdetails');
     Route::get('que_for_survey/{id}/{user_id}', 'Api_controller@que_for_survey')->name('que_for_survey');
     Route::get('surveydetails', 'Api_controller@surveydetails')->name('surveydetails');
-    Route::get('user_feedback', 'Api_controller@user_feedback')->name('user_feedback');
-    Route::get('user_profile', 'Api_controller@user_profile')->name('user_profile');
+    Route::get('user-feedback', 'Api_controller@user_feedback')->name('user_feedback');
+    Route::get('user-profile', 'Api_controller@user_profile')->name('user_profile');
     Route::get('receipt', 'Api_controller@receipt')->name('receipt');
     Route::get('user_notification', 'Api_controller@user_notification')->name('user_notification');
-    Route::get('user_profile', 'Api_controller@user_profile')->name('user_profile');
+    Route::get('user-profile', 'Api_controller@user_profile')->name('user_profile');
 });
 
 Route::get('user_signout', 'Api_controller@user_signout')->name('user_signout');
-Route::get('user_login', 'Api_controller@user_login')->name('user_login');
+Route::get('user-login', 'Api_controller@user_login')->name('user_login');
 Route::get('checkuser_login2', 'Api_controller@checkuser_login2')->name('checkuser_login2');
 Route::get('sortable', 'Api_controller@sortable')->name('sortable');

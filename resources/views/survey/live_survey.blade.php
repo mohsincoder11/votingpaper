@@ -15,7 +15,7 @@
 	<div class="container">
 		<div class="slim-pageheader">
 			<ol class="breadcrumb slim-breadcrumb">
-				<li class="breadcrumb-item"><a href="{{url('added_survey')}}">Survey</a></li>
+				<li class="breadcrumb-item"><a href="{{route('added_survey')}}">Survey</a></li>
 				<li class="breadcrumb-item">Live Survey</li>
 			</ol>
 			<h6 class="slim-pagetitle">Live Election</h6>

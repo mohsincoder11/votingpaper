@@ -89,7 +89,7 @@
              <strong><h2 class="title">REGISTRATION INFO</h2> </strong>
           </div>
           <div class="col-md-6">
-            <?php $successcode=Session::get('successcode') ?>
+            @php $successcode=Session::get('successcode') @endphp
             <input type="hidden" id="error" value="{{$successcode ?? ''}}">
            <div class="alert alert-success alert-dismissible" id="errormsg">
   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>

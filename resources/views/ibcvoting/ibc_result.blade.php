@@ -5,7 +5,7 @@
   <div class="container">
     <div class="slim-pageheader">
      <ol class="breadcrumb slim-breadcrumb">
-        <li class="breadcrumb-item"><a href="{{url('addedibc')}}">IBC Voting</a></li>
+        <li class="breadcrumb-item"><a href="{{route('addedibc')}}">IBC Voting</a></li>
         <li class="breadcrumb-item">IBC Voting Result</li>
       </ol>
       <h6 class="slim-pagetitle">Election Result</h6>

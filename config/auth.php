@@ -46,6 +46,10 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins', // Make sure this points to a valid user provider
+        ],
     ],
 
     /*
@@ -67,6 +71,10 @@ return [
 
     'providers' => [
         'users' => [
+            'driver' => 'eloquent',
+            'model' => App\Electionvotinguserdata::class,
+        ],
+        'admins' => [
             'driver' => 'eloquent',
             'model' => App\User::class,
         ],
@@ -98,6 +106,11 @@ return [
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
+        ],
+        'admins' => [
+            'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
         ],
     ],
 

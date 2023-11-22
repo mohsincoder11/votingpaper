@@ -15,7 +15,7 @@
 	<div class="container">
 		<div class="slim-pageheader">
 			<ol class="breadcrumb slim-breadcrumb">
-				<li class="breadcrumb-item"><a href="{{url('addedibc')}}">IBC Voting</a></li>
+				<li class="breadcrumb-item"><a href="{{route('addedibc')}}">IBC Voting</a></li>
 				<li class="breadcrumb-item">Live IBC Voting</li>
 			</ol>
 			<h6 class="slim-pagetitle">Live Election</h6>

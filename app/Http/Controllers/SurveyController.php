@@ -17,11 +17,11 @@ class SurveyController extends Controller
 {
   public function add_survey()
   {
-    return view('survey/addsurvey');
+    return view('survey.addsurvey');
   }
   public function added_survey()
   {
-    return view('survey/addedsurvey');
+    return view('survey.addedsurvey');
   }
   public function insertsurvey(Request $request)
   {

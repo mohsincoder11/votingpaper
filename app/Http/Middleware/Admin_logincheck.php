@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Session;
+use Auth;
 
 class Admin_logincheck
 {
@@ -16,10 +17,10 @@ class Admin_logincheck
      */
     public function handle($request, Closure $next)
     {
-        $data = Session::get('userdata');
-        if ($data != null) {
+        if (Auth::guard('admin')->user()) {
             return $next($request);
         } else {
             return redirect()->route('login');
-        }    }
+        }
+    }
 }

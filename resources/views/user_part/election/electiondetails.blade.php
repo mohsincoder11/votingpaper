@@ -6,7 +6,7 @@
     <div class="slim-pageheader">
 
       <ol class="breadcrumb slim-breadcrumb">
-        <li class="breadcrumb-item"><a href="{{url('dashboard')}}">Home</a></li>
+        <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
         <li class="breadcrumb-item"><a href="#">Election</a></li>
       </ol>
       <h6 class="slim-pagetitle">Election</h6>
@@ -31,7 +31,7 @@
 
 $.ajax({
   type: "GET",
-  url: 'api/view_election',
+  url: '{{route("view_election")}}',
   data: {
     entityid: $("#entityid").val(),
     mobno: $("#mobno").val()

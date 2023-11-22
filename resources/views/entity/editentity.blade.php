@@ -5,7 +5,7 @@
   <div class="container">
     <div class="slim-pageheader">
       <ol class="breadcrumb slim-breadcrumb">
-        <li class="breadcrumb-item"><a href="{{url('addentity')}}">Entity</a></li>
+        <li class="breadcrumb-item"><a href="{{route('addentity')}}">Entity</a></li>
         <li class="breadcrumb-item">Add Entity</li>
       </ol>
       <h6 class="slim-pagetitle">Add Entity</h6>
@@ -324,7 +324,7 @@
         <div class="form-group mg-b-10-force">
          <label class="form-control-label">ID Proof <span class="tx-danger">*</span>&nbsp;&nbsp;<div class="ibutton" id="ibutton1"><i class="fas fa-info"></i></div></label>
          <div class="custom-file">
-          <input type="file" class="custom-file-input" id="idproof" name="idproof" <?php  if($singledata->idproof) echo 'disabled'; ?>>
+          <input type="file" class="custom-file-input" id="idproof" name="idproof" @php  if($singledata->idproof) echo 'disabled'; @endphp>
           <label class="custom-file-label custom-file-label-primary" for="customFile" id="idlabel">Choose file</label>
         </div><!-- custom-file -->
         <p id="idproof_size_error" class="text-danger tx-12"></p>
@@ -335,7 +335,7 @@
       <div class="form-group mg-b-10-force">
        <label class="form-control-label">Address Proof <span class="tx-danger">*</span>&nbsp;&nbsp;<div class="ibutton" id="ibutton2"><i class="fas fa-info"></i></div></label>
        <div class="custom-file">
-        <input type="file" class="custom-file-input" id="addressproof" name="addressproof" <?php  if($singledata->addressproof) echo 'disabled'; ?>>
+        <input type="file" class="custom-file-input" id="addressproof" name="addressproof" @php  if($singledata->addressproof) echo 'disabled'; @endphp>
         <label class="custom-file-label custom-file-label-primary" for="customFile" id="addresslabel">Choose file</label>
       </div><!-- custom-file -->
       <p id="addressproof_size_error" class="text-danger tx-12"></p>
@@ -347,7 +347,7 @@
     <div class="form-group mg-b-10-force">
      <label class="form-control-label">Business Proof <span class="tx-danger">*</span>&nbsp;&nbsp;<div class="ibutton" id="ibutton3"><i class="fas fa-info"></i></div></label>
      <div class="custom-file">
-      <input type="file" class="custom-file-input" id="businessproof" name="businessproof" <?php  if($singledata->businessproof) echo 'disabled'; ?>> 
+      <input type="file" class="custom-file-input" id="businessproof" name="businessproof" @php  if($singledata->businessproof) echo 'disabled'; @endphp> 
       <label class="custom-file-label custom-file-label-primary" for="customFile" id="businesslabel">Choose file</label>
     </div><!-- custom-file -->
     <p id="businessproof_size_error" class="text-danger tx-12"></p>

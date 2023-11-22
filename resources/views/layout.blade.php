@@ -402,6 +402,7 @@
       visibility: visible;
     }
   </style>
+  @yield('css')
   <script src="{{asset('public/lib/jquery/js/jquery.js')}}"></script>
 
   <script src="{{asset('public/lib/morris.js/js/morris.js')}}"></script>
@@ -414,26 +415,25 @@
   <div class="slim-header ">
     <div class="container">
       <div class="slim-header-left">
-        <h2 class="slim-logo"><a href="{{url('dashboard')}}">VOTING PAPER<span>.</span></a></h2>
+        <h2 class="slim-logo"><a href="{{route('dashboard')}}">VOTING PAPER<span>.</span></a></h2>
 
       </div><!-- slim-header-left -->
       <div class="slim-header-right">
-        <?php $userdata = Session::get('userdata'); ?>
-        <input type="hidden" value="{{$userdata['username']}}" id="user_nameinput">
-        <input type="hidden" value="{{$userdata['id']}}" id="sender_id">
+        
+        <input type="hidden" value="{{auth()->guard('admin')->user()->id}}" id="sender_id">
         <div class="dropdown dropdown-c">
           <a href="#" class="logged-user" data-toggle="dropdown">
             <img src="{{asset('public/img/img0.jpg')}}" alt="">
-            <span>{{$userdata['username']}}</span>
+            <span>{{auth()->guard('admin')->user()->name}}</span>
             <i class="fa fa-angle-down"></i>
           </a>
           <div class="dropdown-menu dropdown-menu-right">
             <nav class="nav">
               <a href="" class="nav-link"><i class="fas fa-user-circle"></i> &nbsp; View Profile</a>
               <a href="" class="nav-link"><i class="fas fa-user-edit"></i> &nbsp; Edit Profile</a>
-              <a href="{{url('notification')}}" class="nav-link"><i class="fas fa-paper-plane"></i> &nbsp; Send Notification</a>
+              <a href="{{route('notification')}}" class="nav-link"><i class="fas fa-paper-plane"></i> &nbsp; Send Notification</a>
               <a href="" class="nav-link"><i class="fas fa-user-cog"></i> &nbsp; Account Settings</a>
-              <a href="{{url('signout')}}" class="nav-link"><i class="fas fa-sign-out-alt"></i> &nbsp; Sign Out</a>
+              <a href="{{route('signout')}}" class="nav-link"><i class="fas fa-sign-out-alt"></i> &nbsp; Sign Out</a>
             </nav>
           </div><!-- dropdown-menu -->
         </div><!-- dropdown -->
@@ -445,7 +445,7 @@
     <div class="container">
       <ul class="nav">
         <li class="nav-item" id="hometab">
-          <a class="nav-link" href="{{url('dashboard')}}">
+          <a class="nav-link" href="{{route('dashboard')}}">
             <i class="fas fa-home"></i> &nbsp;&nbsp;
             <span>Home</span>
           </a>
@@ -459,8 +459,8 @@
           </a>
           <div class="sub-item">
             <ul>
-              <li><a href="{{url('addentity')}}"><i class="fas fa-plus-square"></i>&nbsp;&nbsp;&nbsp;&nbsp;Add Entity</a></li>
-              <li><a href="{{url('addedentity')}}"><i class="fas fa-eye"></i>&nbsp;&nbsp;&nbsp;Registered Entity</a></li>
+              <li><a href="{{route('addentity')}}"><i class="fas fa-plus-square"></i>&nbsp;&nbsp;&nbsp;&nbsp;Add Entity</a></li>
+              <li><a href="{{route('addedentity')}}"><i class="fas fa-eye"></i>&nbsp;&nbsp;&nbsp;Registered Entity</a></li>
 
 
             </ul>
@@ -473,12 +473,12 @@
           </a>
           <div class="sub-item">
             <ul>
-              <li><a href="{{url('addelection')}}"><i class="fas fa-plus-square"></i>&nbsp;&nbsp;&nbsp;&nbsp;Create Poll</a></li>
-              <li><a href="{{url('addedelection')}}"><i class="fas fa-eye"></i>&nbsp;&nbsp;&nbsp;&nbsp;Registered Poll</a></li>
+              <li><a href="{{route('addelection')}}"><i class="fas fa-plus-square"></i>&nbsp;&nbsp;&nbsp;&nbsp;Create Poll</a></li>
+              <li><a href="{{route('addedelection')}}"><i class="fas fa-eye"></i>&nbsp;&nbsp;&nbsp;&nbsp;Registered Poll</a></li>
               <!--                 <li><a href=""><i class="fas fa-file-medical"></i>&nbsp;&nbsp;&nbsp;&nbsp;Voting Status</a></li>
  -->
-              <li><a href="{{url('live_election')}}"><i class="fas fa-chart-line"></i>&nbsp;&nbsp;&nbsp;&nbsp;Live Election</a></li>
-              <li><a href="{{url('election_result')}}"><i class="fas fa-file-alt"></i>&nbsp;&nbsp;&nbsp;&nbsp;Result</a></li>
+              <li><a href="{{route('live_election')}}"><i class="fas fa-chart-line"></i>&nbsp;&nbsp;&nbsp;&nbsp;Live Election</a></li>
+              <li><a href="{{route('election_result')}}"><i class="fas fa-file-alt"></i>&nbsp;&nbsp;&nbsp;&nbsp;Result</a></li>
             </ul>
           </div><!-- dropdown-menu -->
         </li>
@@ -489,10 +489,10 @@
           </a>
           <div class="sub-item">
             <ul>
-              <li><a href="{{url('addibc')}}"><i class="fas fa-plus-square"></i>&nbsp;&nbsp;&nbsp;&nbsp;Create Poll</a></li>
-              <li><a href="{{url('addedibc')}}"><i class="fas fa-eye"></i>&nbsp;&nbsp;&nbsp;&nbsp;Registered Poll</a></li>
-              <li><a href="{{url('live_ibc_voting')}}"><i class="fas fa-chart-line"></i>&nbsp;&nbsp;&nbsp;&nbsp;Live Voting </a></li>
-              <li><a href="{{url('ibc_result')}}"><i class="fas fa-list-alt"></i>&nbsp;&nbsp;&nbsp;&nbsp;Results</a></li>
+              <li><a href="{{route('addibc')}}"><i class="fas fa-plus-square"></i>&nbsp;&nbsp;&nbsp;&nbsp;Create Poll</a></li>
+              <li><a href="{{route('addedibc')}}"><i class="fas fa-eye"></i>&nbsp;&nbsp;&nbsp;&nbsp;Registered Poll</a></li>
+              <li><a href="{{route('live_ibc_voting')}}"><i class="fas fa-chart-line"></i>&nbsp;&nbsp;&nbsp;&nbsp;Live Voting </a></li>
+              <li><a href="{{route('ibc_result')}}"><i class="fas fa-list-alt"></i>&nbsp;&nbsp;&nbsp;&nbsp;Results</a></li>
 
             </ul>
           </div><!-- dropdown-menu -->
@@ -504,10 +504,10 @@
           </a>
           <div class="sub-item">
             <ul>
-              <li><a href="{{url('add_survey')}}"><i class="fas fa-plus-square"></i>&nbsp;&nbsp;&nbsp;&nbsp;Add Survey</a></li>
-              <li><a href="{{url('added_survey')}}"><i class="fas fa-eye"></i>&nbsp;&nbsp;&nbsp;Added Survey</a></li>
-              <li><a href="{{url('live_survey')}}"><i class="fas fa-chart-line"></i>&nbsp;&nbsp;&nbsp;Live Survey</a></li>
-              <li><a href="{{url('survey_result')}}"><i class="fas fa-file-alt"></i>&nbsp;&nbsp;&nbsp;&nbsp;Result</a></li>
+              <li><a href="{{route('add_survey')}}"><i class="fas fa-plus-square"></i>&nbsp;&nbsp;&nbsp;&nbsp;Add Survey</a></li>
+              <li><a href="{{route('added_survey')}}"><i class="fas fa-eye"></i>&nbsp;&nbsp;&nbsp;Added Survey</a></li>
+              <li><a href="{{route('live_survey')}}"><i class="fas fa-chart-line"></i>&nbsp;&nbsp;&nbsp;Live Survey</a></li>
+              <li><a href="{{route('survey_result')}}"><i class="fas fa-file-alt"></i>&nbsp;&nbsp;&nbsp;&nbsp;Result</a></li>
 
 
             </ul>
@@ -522,7 +522,7 @@
 
 
         <li class="nav-item" id="usermanagetab">
-          <a class="nav-link" href="{{url('usermanage')}}">
+          <a class="nav-link" href="{{route('usermanage')}}">
             <i class="fas fa-user-circle"></i> &nbsp;&nbsp;
             <span>User Management</span>
           </a>

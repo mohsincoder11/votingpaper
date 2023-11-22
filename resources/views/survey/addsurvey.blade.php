@@ -52,7 +52,7 @@
 	<div class="container">
 		<div class="slim-pageheader">
 			<ol class="breadcrumb slim-breadcrumb">
-				<li class="breadcrumb-item"><a href="{{url('added_survey')}}">Survey</a></li>
+				<li class="breadcrumb-item"><a href="{{route('added_survey')}}">Survey</a></li>
 				<li class="breadcrumb-item">Add Survey</li>
 			</ol>
 			<h6 class="slim-pagetitle">Add Survey</h6>
@@ -487,7 +487,7 @@
 	</div><!-- slim-mainpanel -->
 	<div id="editresolutionmodal" class="modal fade ">
 		<input type="hidden" id="updateresolutionid">
-		<div class="modal-dialog modal-dialog-vertical-center" role="document">
+		<div class="modal-dialog modal-dialog-vertical-center modal-lg" role="document">
 			<div class="modal-content bd-0 tx-14">
 				<div class="modal-header pd-y-20 pd-x-25">
 					<h6 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold">Edit Record!</h6>
@@ -523,7 +523,7 @@
 	</div><!-- modal -->
 	<div id="editmodal" class="modal fade ">
 		<input type="hidden" id="updatevoterlistid">
-		<div class="modal-dialog modal-dialog-vertical-center" role="document">
+		<div class="modal-dialog modal-dialog-vertical-center modal-lg" role="document">
 			<div class="modal-content bd-0 tx-14">
 				<div class="modal-header pd-y-20 pd-x-25">
 					<h6 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold">Edit Record!</h6>

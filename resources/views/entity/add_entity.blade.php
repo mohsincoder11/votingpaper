@@ -20,7 +20,7 @@
   <div class="container">
     <div class="slim-pageheader">
       <ol class="breadcrumb slim-breadcrumb">
-        <li class="breadcrumb-item"><a href="{{url('addentity')}}">Entity</a></li>
+        <li class="breadcrumb-item"><a href="{{route('addentity')}}">Entity</a></li>
         <li class="breadcrumb-item">Add Entity</li>
       </ol>
       <h6 class="slim-pagetitle">Add Entity</h6>
@@ -287,7 +287,7 @@
               <div class="form-group mg-b-10-force">
                 <label class="form-control-label">&nbsp;</label>
 
-                <button class="btn btn-success sendotp_btn">Send Otp</button>
+                <button class="btn btn-success sendotp_btn">Send OTP</button>
               </div>
             </div><!-- col-4 -->
 
@@ -677,7 +677,7 @@
               $("#otp_error").text('');
 
             } else {
-              $("#otp_error").text('Please enter valid OTP');
+              $("#otp_error").text('Please enter valid OTP.');
               return;
             }
             if (pername.isValid() && mobno.isValid() && email.isValid() && designation.isValid()) {

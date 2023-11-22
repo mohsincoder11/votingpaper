@@ -10,8 +10,9 @@ use App\Election;
 use App\Resolution;
 use App\Entity;
 use App\Survey;
+use Auth;
 
-class Admin extends Controller
+class AdminController extends Controller
 {
 	//
 	public function dashboard()
@@ -24,28 +25,27 @@ class Admin extends Controller
 		];
 		return view('dashboard',$this->data);
 	}
-	public function login()
-	{
-		return view('login');
-	}
+	
 	public function checklogin(Request $request)
 	{
-		$userdata = Usermanage::where('username', $request->username)->first();
-		if ($userdata && Hash::check($request->password, $userdata['password'])) {
-			$request->session()->put('userdata', $userdata);
+		if (Auth::guard('admin')->attempt(array('email' => $request->email, 'password' => $request->password))) {                
+
 			echo json_encode(1);
-		} else {
+		}
+		else {
 			echo json_encode(0);
 		}
+		
 	}
 	public function signout()
 	{
-		session()->forget('userdata');
+        Auth::guard('admin')->logout();
+
 		return redirect()->route('login');
 	}
 	public function usermanage()
 	{
-		return view('admin/usermanage');
+		return view('admin.usermanage');
 	}
 	public function checkusername(Request $request)
 	{

@@ -16,7 +16,7 @@
 	<div class="container">
 		<div class="slim-pageheader">
 			<ol class="breadcrumb slim-breadcrumb">
-				<li class="breadcrumb-item"><a href="{{url('addedibc')}}">IBC Voting</a></li>
+				<li class="breadcrumb-item"><a href="{{route('addedibc')}}">IBC Voting</a></li>
 				<li class="breadcrumb-item">Add IBC Voting</li>
 			</ol>
 			<h6 class="slim-pagetitle">Edit IBC Voting</h6>
@@ -415,7 +415,7 @@
 </div><!-- slim-mainpanel -->
 <div id="editresolutionmodal" class="modal fade ">
 	<input type="hidden" id="updateresolutionid">
-	<div class="modal-dialog modal-dialog-vertical-center" role="document">
+	<div class="modal-dialog modal-dialog-vertical-center modal-lg" role="document">
 		<div class="modal-content bd-0 tx-14">
 			<div class="modal-header pd-y-20 pd-x-25">
 				<h6 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold">Edit Record!</h6>
@@ -453,7 +453,7 @@
 
 <div id="editmodal" class="modal fade ">
 	<input type="hidden" id="updatevoterlistid">
-	<div class="modal-dialog modal-dialog-vertical-center" role="document">
+	<div class="modal-dialog modal-dialog-vertical-center modal-lg" role="document">
 		<div class="modal-content bd-0 tx-14">
 			<div class="modal-header pd-y-20 pd-x-25">
 				<h6 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold">Edit Record!</h6>
@@ -584,7 +584,7 @@
 
 
 <div id="insertmodal" class="modal fade ">
-	<div class="modal-dialog modal-dialog-vertical-center" role="document">
+	<div class="modal-dialog modal-dialog-vertical-center modal-lg" role="document">
 		<div class="modal-content bd-0 tx-14">
 			<div class="modal-header pd-y-20 pd-x-25">
 				<h6 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold">Add Record!</h6>

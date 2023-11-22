@@ -7,8 +7,8 @@
   <div class="container">
     <div class="slim-pageheader">
       <ol class="breadcrumb slim-breadcrumb">
-        <li class="breadcrumb-item"><a href="{{url('dashboard')}}">Home</a></li>
-        <li class="breadcrumb-item"><a href="{{url('added_survey')}}">Survey
+        <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
+        <li class="breadcrumb-item"><a href="{{route('added_survey')}}">Survey
 
         </a></li>
       </ol>

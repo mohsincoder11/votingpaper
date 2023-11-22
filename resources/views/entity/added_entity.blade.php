@@ -1,6 +1,6 @@
 @extends('layout')
 @section('content')
-<?php $successcode=Session::get('successcode') ;?>
+@php $successcode=Session::get('successcode') ;@endphp
 <input type="hidden" id="successcode" value="{{$successcode}}">
 <div id="snackbarupdate"> 
 	<div class="row">
@@ -14,7 +14,7 @@
 	<div class="container">
 		<div class="slim-pageheader">
 			<ol class="breadcrumb slim-breadcrumb">
-				<li class="breadcrumb-item"><a href="{{url('addentity')}}">Entity</a></li>
+				<li class="breadcrumb-item"><a href="{{route('addentity')}}">Entity</a></li>
 				<li class="breadcrumb-item">Added Entity</li>
 			</ol>
 			<h6 class="slim-pagetitle">Added Entity</h6>

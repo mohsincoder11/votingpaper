@@ -11,7 +11,7 @@
         <li class="breadcrumb-item"><a href="#">Home</a></li>
         <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
       </ol>
-      <h6 class="slim-pagetitle">Welcome back,<span id="user_name"></span> </h6>
+      <h6 class="slim-pagetitle">Welcome back,{{auth()->guard('admin')->user()->name}} </h6>
     </div><!-- slim-pageheader -->
 
     <div class="row row-xs">
@@ -19,7 +19,7 @@
 
      <div class="col-sm-6 col-lg-3">
       <div class="card card-status">
-        <a href="{{url('addedentity')}}"> 
+        <a href="{{route('addedentity')}}"> 
           <div class="media">
             <i class="fas fa-cubes dashboard_icon" ></i>
             <div class="media-body">
@@ -33,7 +33,7 @@
     </div><!-- col-3 -->
      <div class="col-sm-6 col-lg-3">
       <div class="card card-status">
-        <a href="{{url('addedelection')}}"> 
+        <a href="{{route('addedelection')}}"> 
           <div class="media">
             <i class="fas fa-person-booth dashboard_icon" ></i>
             <div class="media-body">
@@ -48,7 +48,7 @@
 
     <div class="col-sm-6 col-lg-3 mg-t-10 mg-sm-t-0">
       <div class="card card-status">
-        <a href="{{url('addedibc')}}"> 
+        <a href="{{route('addedibc')}}"> 
           <div class="media">
             <i class="fas fa-vote-yea dashboard_icon" ></i>
             <div class="media-body">
@@ -63,7 +63,7 @@
 
     <div class="col-sm-6 col-lg-3 mg-t-10 mg-lg-t-0">
       <div class="card card-status">
-        <a href="{{url('added_survey')}}"> 
+        <a href="{{route('added_survey')}}"> 
           <div class="media">
             <i class="fa fa-poll dashboard_icon" ></i>
             <div class="media-body">
@@ -98,7 +98,7 @@
 @section('js')
 <script>
   $(document).ready(function() {
-    $("#user_name").text(' ' + $("#user_nameinput").val());
+    $("#hometab").addClass("active");
     $("#loaderpage").hide();
          $('.number-count').each(function () {
 

@@ -7,8 +7,8 @@
   <div class="container">
     <div class="slim-pageheader">
       <ol class="breadcrumb slim-breadcrumb">
-        <li class="breadcrumb-item"><a href="{{url('dashboard')}}">Home</a></li>
-        <li class="breadcrumb-item"><a href="{{url('addedelection')}}">Election
+        <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
+        <li class="breadcrumb-item"><a href="{{route('addedelection')}}">Election
 
         </a></li>
       </ol>
@@ -103,7 +103,7 @@ $data=DB::select("select sv.candidate_id_no,sv.candidate_name,sv.candidate_elect
 
 <script>
  function drawChart() {
-   var data=<?php echo json_encode($data ?? ''); ?>; 
+   var data=@php echo json_encode($data ?? ''); @endphp; 
   // console.log(data);
    var arrValues = [['Candidate', 'vote']];  
 var total_vote=0;      // DEFINE AN ARRAY.
@@ -174,10 +174,10 @@ $i++;
 <script>
   $("document").ready(function() {
     $("#electiontab").addClass('active');
-    var type=<?php echo $election_detail->ballottype; ?>;
+    var type=@php echo $election_detail->ballottype; @endphp;
     if(type==1)
     {
-     var data=<?php echo json_encode($candidate_list ?? ''); ?>;
+     var data=@php echo json_encode($candidate_list ?? ''); @endphp;
 //     console.log(data);
 var total_vote=0;
 for(i=0;i<data.length;i++)

@@ -22,12 +22,12 @@ class ElectionController extends Controller
 	public function addelection()
 	{
 
-		return view('election/addelection');
+		return view('election.addelection');
 	}
 	public function addedelection()
 	{
 
-		return view('election/addedelection');
+		return view('election.addedelection');
 	}
 
 	public function getallelectionrow()

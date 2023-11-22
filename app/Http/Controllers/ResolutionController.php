@@ -29,11 +29,11 @@ class ResolutionController extends Controller
 	public function addibc()
 	{
 
-		return view('ibcvoting/addibc');
+		return view('ibcvoting.addibc');
 	}
 	public function addedibc()
 	{
-		return view('ibcvoting/addedibc');
+		return view('ibcvoting.addedibc');
 	}
 	public function getallibcvotingrow()
 	{
@@ -220,7 +220,7 @@ class ResolutionController extends Controller
 		->where('id', $this->data['singledata']->entity)->first();
 		//return response()->json($this->data['singledata']);
 		//exit();
-		return view('ibcvoting/editibcvoting', $this->data);
+		return view('ibcvoting.editibcvoting', $this->data);
 	}
 	public function getibcvoterdata(Request $request)
 	{

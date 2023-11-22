@@ -16,7 +16,7 @@
 
      <div class="col-sm-6 col-lg-4">
       <div class="card card-status zoom">
-        <a href="{{url('electiondetails')}}"> 
+        <a href="{{route('electiondetails')}}"> 
           <div class="media">
             <i class="fas fa-person-booth dashboard_icon" ></i>
             <div class="media-body">
@@ -31,7 +31,7 @@
 
     <div class="col-sm-6 col-lg-4 mg-t-10 mg-sm-t-0">
       <div class="card card-status zoom">
-        <a href="{{url('ibcdetails')}}"> 
+        <a href="{{route('ibcdetails')}}"> 
           <div class="media">
             <i class="fas fa-vote-yea dashboard_icon" ></i>
             <div class="media-body">
@@ -46,7 +46,7 @@
 
     <div class="col-sm-6 col-lg-4 mg-t-10 mg-lg-t-0">
       <div class="card card-status zoom">
-        <a href="{{url('surveydetails')}}"> 
+        <a href="{{route('surveydetails')}}"> 
           <div class="media">
             <i class="fa fa-poll dashboard_icon" ></i>
             <div class="media-body">
@@ -80,25 +80,17 @@
 </div>
 
 
-
-
-
-
-
-
-
-
-
-
 @stop
 
 @section('js')
 <script>
   $(document).ready(function() {
+    $("#hometab").addClass('active');
+
     $("#user_name").text(' ' + $("#user_nameinput").val());
     $.ajax({
       type: "GET",
-      url: 'api/get_sie_count',
+      url: '{{route("get_sie_count")}}',
       data: {
         entityid: $("#entityid").val(),
         mobno: $("#mobno").val()
