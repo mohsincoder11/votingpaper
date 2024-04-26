@@ -12,17 +12,30 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::get('/clear-cache', function () {
-	Artisan::call('cache:clear');
-	Artisan::call('route:clear');
-	Artisan::call('config:clear');
-	Artisan::call('view:clear');
-	return redirect()->back();
-	//return "All cache cleared!";
+    Artisan::call('cache:clear');
+    Artisan::call('route:clear');
+    Artisan::call('config:clear');
+    Artisan::call('view:clear');
+    return redirect()->back();
+    //return "All cache cleared!";
 });
-//Admin
-Route::view('/', 'login')->name('login');
+//website route start/////////
+Route::view('/', 'website.index')->name('home');
+Route::view('/sign-in', 'website.sign-in')->name('sign-in');
+Route::post('/sign-in-attempt', 'WebsiteController@sign_in_attempt')->name('sign-in-attempt');
+Route::view('/sign-up', 'website.sign-up')->name('sign-up');
+Route::post('/sign-up-save', 'WebsiteController@sign_up_save')->name('sign-up-save');
+Route::get('/log-out', 'WebsiteController@log_out')->name('log-out');
+
+//website route end/////////
+
+//admin route///////////////////////////////
+Route::view('/login', 'login')->name('login');
 Route::get('checklogin', 'AdminController@checklogin')->name('checklogin');
+//admin route///////////////////////////////
+
 
 Route::group(['middleware' => ['Admin_logincheck']], function () {
     Route::get('dashboard', 'AdminController@dashboard')->name('dashboard');
@@ -30,7 +43,7 @@ Route::group(['middleware' => ['Admin_logincheck']], function () {
     Route::get('notification', 'AdminController@notification')->name('notification');
     Route::get('send_notification', 'AdminController@send_notification')->name('send_notification');
     Route::get('get_user_byentity', 'AdminController@get_user_byentity')->name('get_user_byentity');
-    
+
     //election
     Route::get('addelection', 'ElectionController@addelection')->name('addelection');
     Route::get('addedelection', 'ElectionController@addedelection')->name('addedelection');
@@ -61,7 +74,6 @@ Route::group(['middleware' => ['Admin_logincheck']], function () {
     Route::get('live_survey', 'SurveyController@live_survey')->name('live_survey');
     Route::get('survey_result', 'SurveyController@survey_result')->name('survey_result');
     Route::get('view_survey_result/{id}', 'SurveyController@view_survey_result')->name('view_survey_result');
-
 });
 
 Route::get('get_all_adminnotification', 'AdminController@get_all_adminnotification')->name('get_all_adminnotification');

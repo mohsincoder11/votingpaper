@@ -39,7 +39,7 @@
                 </div><!-- form-group -->
                 <button type="submit" class="btn btn-primary btn-block btn-signin">Sign In</button>
             </form>
-            <p class="mg-b-0">Don't have an account? <a href="page-signup.html">Sign Up</a></p>
+            {{-- <p class="mg-b-0">Don't have an account? <a href="page-signup.html">Sign Up</a></p> --}}
         </div><!-- signin-box -->
 
     </div><!-- signin-wrapper -->

@@ -34,7 +34,7 @@
 	<div class="container">
 		<div class="slim-pageheader">
 			<ol class="breadcrumb slim-breadcrumb">
-				<li class="breadcrumb-item"><a href="{{route('addsurvey')}}">Survey</a>
+				<li class="breadcrumb-item"><a href="{{route('add_survey')}}">Survey</a>
 				</li>
 				<li class="breadcrumb-item">Added Survey</li>
 			</ol>
