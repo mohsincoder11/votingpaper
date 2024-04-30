@@ -75,7 +75,7 @@ if(b.ans_status==1)
   btn_text='Completed';
 }
 
-
+console.log(b.meetingtitle);
 
 if(!b.meetingtitle==null)
 {

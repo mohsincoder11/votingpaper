@@ -420,11 +420,23 @@
       </div><!-- slim-header-left -->
       <div class="slim-header-right">
         
-        <input type="hidden" value="{{auth()->guard('admin')->user()->id}}" id="sender_id">
+        @if(auth()->user())
+          <input type="hidden" value="{{auth()->user()->id}}" id="sender_id">
+        @else
+          <input type="hidden" value="{{auth()->user()->id}}" id="sender_id">
+        @endif
+
         <div class="dropdown dropdown-c">
           <a href="#" class="logged-user" data-toggle="dropdown">
             <img src="{{asset('public/img/img0.jpg')}}" alt="">
-            <span>{{auth()->guard('admin')->user()->name}}</span>
+            <span>
+              @if(auth()->user())
+              {{auth()->user()->name}}
+              @else
+              {{auth()->user()->name}}
+              @endif
+            
+            </span>
             <i class="fa fa-angle-down"></i>
           </a>
           <div class="dropdown-menu dropdown-menu-right">
@@ -520,13 +532,14 @@
           </a>
         </li>
 
-
+@if(auth()->user()->role==1)
         <li class="nav-item" id="usermanagetab">
           <a class="nav-link" href="{{route('usermanage')}}">
             <i class="fas fa-user-circle"></i> &nbsp;&nbsp;
             <span>User Management</span>
           </a>
         </li>
+        @endif
       </ul>
     </div><!-- container -->
   </div><!-- slim-navbar -->

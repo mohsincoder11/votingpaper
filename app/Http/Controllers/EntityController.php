@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Entity;
 use Session;
-use File, PDF, DB;
+use File, PDF, DB,Auth;
 use Mail;
 
 class EntityController extends Controller
@@ -14,13 +14,13 @@ class EntityController extends Controller
 
     public function addentity(Request $request)
     {     // return env('MAIL_FROM_ADDRESS');
-        if ($request->ajax()) {
-            $data = ([
-                'states' => DB::table('states')->get(),
-                'cities' => DB::table('cities')->where('state_id', 1)->get(),
-            ]);
-            return response()->json($data);
-        }
+        // if ($request->ajax()) {
+        //     $data = ([
+        //         'states' => DB::table('states')->get(),
+        //         'cities' => DB::table('cities')->where('state_id', 1)->get(),
+        //     ]);
+        //     return response()->json($data);
+        // }
         return view('entity.add_entity');
     }
     public function addedentity()
@@ -39,6 +39,7 @@ class EntityController extends Controller
 
         $data = Entity::create([
             'entityid' => $newentityid,
+			'user_id'=>Auth::user()->id,
             'entityname' => ucfirst($request['entityname']),
             'regno' => $request['regno'],
             'entitytype' => $request['entitytype'],
@@ -253,12 +254,24 @@ class EntityController extends Controller
     }
     public function getallentity()
     {
-        $data = DB::table('entities')->orderBy('id', 'desc')->get();
+        $user=Auth::user();
+        $data = DB::table('entities')
+        ->when($user->role == 2, function ($query) use ($user) {
+            return $query->where('user_id', $user->id);
+        })
+        ->orderBy('id', 'desc')->get();
         return response()->json($data);
     }
     public function getentitylist()
     {
-        $data = Entity::select('entityname', 'id')->orderBy('id', 'desc')->where('status', '>', 3)->get();
+        $user=Auth::user();
+        $data = Entity::select('entityname', 'id')
+        ->orderBy('id', 'desc')
+        ->where('status', '>', 3)
+        ->when($user->role == 2, function ($query) use ($user) {
+            return $query->where('user_id', $user->id);
+        })
+        ->get();
         return response()->json($data);
     }
     public function deleteentity(Request $request)

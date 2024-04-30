@@ -1,8 +1,7 @@
 @extends('website.layout')
 @section('content')
 
-    <div class="user-form-area ptb-100"
-        style="margin-top:3%;background-image: url('{{ asset('public/website/assets/images/donate-bg.jpg') }}')">
+    <div class="user-form-area ptb-100">
         <div class="d-table">
             <div class="d-table-cell">
                 <div class="container">

@@ -8,7 +8,7 @@ use App\Electionvotinguserdata;
 use App\Survey_questionier;
 use Session;
 use \Carbon\Carbon;
-use File, DB;
+use File, DB,Auth;
 use Illuminate\Http\Response;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\ElectionvotinguserdataImport;
@@ -35,6 +35,7 @@ class SurveyController extends Controller
     }
 
     $data = Survey::create([
+			'user_id'=>Auth::user()->id,
       'surveyid' => $newentityid,
       'entity' => $request->entity,
       'surveytype' => $request->surveytype,
@@ -242,8 +243,31 @@ public function live_survey(Request $request)
 {
   if($request->ajax())
     {
+      $user=Auth::user();
       //follower_id as parent_follower,user_id as parent_user,
-      $data = DB::select("select e.id,e.surveyid,e.startdate,e.starttime,e.enddate,e.endtime,e.surveytitle,e.meetingtitle,e.meetingdate,(select count(*) from electionvotinguserdatas  where parent_id=e.id) as total_voter,(select count(*) from electionvotinguserdatas where electionvotinguserdatas.parent_id=e.id AND electionvotinguserdatas.ans_status=1) as voted from surveys as e left join electionvotinguserdatas on e.id=electionvotinguserdatas.parent_id where e.status=3 Group By e.id order by  e.id desc");
+      $data = DB::table('surveys as e')
+    ->select(
+        'e.id',
+        'e.surveyid',
+        'e.startdate',
+        'e.starttime',
+        'e.enddate',
+        'e.endtime',
+        'e.surveytitle',
+        'e.meetingtitle',
+        'e.meetingdate',
+        DB::raw('(select count(*) from electionvotinguserdatas where parent_id = e.id) as total_voter'),
+        DB::raw('(select count(*) from electionvotinguserdatas where electionvotinguserdatas.parent_id = e.id AND electionvotinguserdatas.ans_status = 1) as voted')
+    )
+    ->leftJoin('electionvotinguserdatas', 'e.id', '=', 'electionvotinguserdatas.parent_id')
+    ->where('e.status', 3)
+    ->when($user->role == 2, function ($query) use ($user) {
+      return $query->where('e.user_id', $user->id);
+  })
+    ->groupBy('e.id')
+    ->orderBy('e.id', 'desc')
+    ->get();
+
 
       //$data = DB::table('elections')->orderBy('id', 'desc')->where('status',3)->get();
       return response()->json($data);

@@ -50,7 +50,7 @@ class WebsiteController extends Controller
             'country' => $request->input('country'),
             'org_name' => $request->input('org_name'),
         ]);
-        return redirect()->back()->with('success', 'User created successfully.');
+        return redirect()->route('sign-in')->with('success', 'Sign up successfully.');
     }
 
     public function sign_in_attempt(Request $request)
@@ -73,14 +73,14 @@ class WebsiteController extends Controller
             ->orWhere('user_name', $request->user_name)
             ->first();
         if ($user && Hash::check($request->password, $user->password)) {
-            Auth::guard('vendor')->login($user, true);
-            return redirect()->route('home')->with('success', 'sign in successfully.');
+            Auth::login($user, true);
+            return redirect()->route('dashboard')->with('success', 'sign in successfully.');
         } else {
             return redirect()->route('sign-in')->with('errors', 'Please check username or password');
         }
     }
     public function log_out(){
-        Auth::guard('vendor')->logout();
+        Auth::logout();
         return redirect()->route('sign-in')->with('success', 'sign out successfully.');
 
     }

@@ -40256,5 +40256,12 @@ a.hover-white-8:hover, a.hover-white-8:focus {
   max-width: 1350px; }
 
 .card-status h1{
-  font-size:1.5em !important;
+  font-size:1.2em !important;
+}
+
+.disable-card{
+  opacity: 0.5;
+  background:#fafafa;
+  pointer-events: none;
+
 }

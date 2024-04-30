@@ -209,10 +209,10 @@
                         </ul>
                         <div class="side-nav">
                             <!-- <a class="left" href="#">Join Us</a> -->
-                            @if(Auth::guard('vendor')->user())
+                            @if(Auth::user())
                             <div class="dropdown">
                                 <button class="common-btn">
-                                    {{Auth::guard('vendor')->user()->user_name}}
+                                    {{Auth::user()->user_name}}
                                     <i class="fa fa-caret-down"></i>
                                 </button>
                                 <div class="dropdown-content">
@@ -220,7 +220,7 @@
                                 </div>
                             </div>
                             {{-- <a class="right common-btn" href="javascript:void(none)">
-                                {{Auth::guard('vendor')->user()->user_name}}
+                                {{Auth::user()->user_name}}
                             </a> --}}
                             @else
                             <a class="right common-btn" href="{{ route('sign-in') }}">Sign In</a>

@@ -4119,11 +4119,12 @@ button:focus {
 /*----- User Form CSS -----*/
 .user-form-area {
   background-image: url("../images/user-bg.jpg");
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-  position: relative;
-  height: 45vh;
+ 
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    position: relative;
+    height: 100vh;
 }
 
 .user-form-area:before {
@@ -4133,7 +4134,8 @@ button:focus {
   height: 100%;
   top: 0;
   left: 0;
-  background-color:#F00041;
+  background-color: #2A2A2A;
+  opacity: .90;
   /* opacity: .90; */
 }
 

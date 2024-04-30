@@ -11,7 +11,7 @@
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
                 </ol>
-                <h6 class="slim-pagetitle">Welcome back,{{ auth()->guard('admin')->user()->name }} </h6>
+                <h6 class="slim-pagetitle">Welcome back,{{ auth()->user()->name }} </h6>
             </div><!-- slim-pageheader --> --}}
 
             <div class="row row-xs mt-4 mb-2">

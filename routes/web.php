@@ -36,6 +36,11 @@ Route::view('/login', 'login')->name('login');
 Route::get('checklogin', 'AdminController@checklogin')->name('checklogin');
 //admin route///////////////////////////////
 
+//     Route::prefix('vendor')->name('vendor.')->group(function () {
+
+// Route::get('dashboard', 'VendorController@dashboard')->name('dashboard');
+// });
+
 
 Route::group(['middleware' => ['Admin_logincheck']], function () {
     Route::get('dashboard', 'AdminController@dashboard')->name('dashboard');
@@ -48,7 +53,7 @@ Route::group(['middleware' => ['Admin_logincheck']], function () {
     Route::get('addelection', 'ElectionController@addelection')->name('addelection');
     Route::get('addedelection', 'ElectionController@addedelection')->name('addedelection');
     Route::get('editelection/{id}', 'ElectionController@editelection')->name('editelection');
-    Route::get('election_result', 'ElectionController@election_result')->name('election_result');
+    Route::get('election-result', 'ElectionController@election_result')->name('election_result');
     Route::get('view_election_list', 'ElectionController@view_election_list')->name('view_election_list');
     Route::get('view_election_result/{election_id}', 'ElectionController@view_election_result')->name('view_election_result');
     Route::get('live-election', 'ElectionController@live_election')->name('live_election');;
@@ -69,11 +74,11 @@ Route::group(['middleware' => ['Admin_logincheck']], function () {
 
 
     //survey
-    Route::get('add_survey', 'SurveyController@add_survey')->name('add_survey');
-    Route::get('added_survey', 'SurveyController@added_survey')->name('added_survey');
-    Route::get('live_survey', 'SurveyController@live_survey')->name('live_survey');
-    Route::get('survey_result', 'SurveyController@survey_result')->name('survey_result');
-    Route::get('view_survey_result/{id}', 'SurveyController@view_survey_result')->name('view_survey_result');
+    Route::get('add-survey', 'SurveyController@add_survey')->name('add_survey');
+    Route::get('added-survey', 'SurveyController@added_survey')->name('added_survey');
+    Route::get('live-survey', 'SurveyController@live_survey')->name('live_survey');
+    Route::get('survey-result', 'SurveyController@survey_result')->name('survey_result');
+    Route::get('view-survey-result/{id}', 'SurveyController@view_survey_result')->name('view_survey_result');
 });
 
 Route::get('get_all_adminnotification', 'AdminController@get_all_adminnotification')->name('get_all_adminnotification');

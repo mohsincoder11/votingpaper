@@ -11,22 +11,22 @@
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
                 </ol>
-                <h6 class="slim-pagetitle">Welcome back,{{ auth()->guard('admin')->user()->name }} </h6>
+                <h6 class="slim-pagetitle">Welcome back,{{ auth()->user()->name }} </h6>
             </div><!-- slim-pageheader --> --}}
 
             <div class="row row-xs mt-4 mb-2">
                 <div class="col-sm-6 col-lg-3">
-                    <h6 class="slim-pagetitle">Entity</h6>
+                    <h6 class="slim-pagetitle">Entity </h6>
                 </div>
             </div>
             <div class="row row-xs  mb-4">
                 <div class="col-sm-6 col-lg-3">
-                    <div class="card card-status">
+                    <div class="card card-status {{CheckCardDisabled('entity')}}">
                         <a href="{{ route('addedentity') }}">
                             <div class="media">
                                 <i class="fas fa-cubes dashboard_icon"></i>
                                 <div class="media-body">
-                                    <h1><span>ENTITY</span></h1>
+                                    <h1><span>ENTITY </span></h1>
                                     <p><b>&nbsp; </b></p>
                                 </div><!-- media-body -->
                             </div><!-- media -->
@@ -58,7 +58,7 @@
             </div>
             <div class="row row-xs  mb-4">
                 <div class="col-sm-6 col-lg-3">
-                    <div class="card card-status">
+                    <div class="card card-status {{CheckCardDisabled('election')}}">
                         <a href="{{ route('addedelection') }}">
                             <div class="media">
                                 <i class="fas fa-person-booth dashboard_icon"></i>
@@ -76,7 +76,7 @@
                             <div class="media">
                                 <i class="fas fa-plus-circle dashboard_icon"></i>
                                 <div class="media-body">
-                                    <h1><span >ELECTION</span></h1>
+                                    <h1><span>Add ELECTION</span></h1>
                                     <p><b> &nbsp;</b></p>
                                 </div><!-- media-body -->
                             </div><!-- media -->
@@ -84,8 +84,8 @@
                     </div><!-- card -->
                 </div><!-- col-3 -->
                 <div class="col-sm-6 col-lg-3">
-                    <div class="card card-status">
-                        <a href="{{ route('live_election') }}">
+                    <div class="card card-status {{CheckCardDisabled('election_live')}}">
+                        <a href="{{ route('live_election')}}">
                             <div class="media">
                                 <i class="fas fa-chart-line dashboard_icon"></i>
                                 <div class="media-body">
@@ -97,7 +97,7 @@
                     </div><!-- card -->
                 </div><!-- col-3 -->
                 <div class="col-sm-6 col-lg-3">
-                    <div class="card card-status">
+                    <div class="card card-status {{CheckCardDisabled('election_complete')}}">
                         <a href="{{ route('election_result') }}">
                             <div class="media">
                                 <i class="fas fa-file-alt dashboard_icon"></i>
@@ -118,7 +118,7 @@
             </div>
             <div class="row row-xs  mb-4">
                 <div class="col-sm-6 col-lg-3 mg-t-10 mg-sm-t-0">
-                    <div class="card card-status">
+                    <div class="card card-status {{CheckCardDisabled('ibc')}}">
                         <a href="{{ route('addedibc') }}">
                             <div class="media">
                                 <i class="fas fa-vote-yea dashboard_icon"></i>
@@ -130,7 +130,7 @@
                     </div><!-- card -->
                 </div><!-- col-3 -->
                 <div class="col-sm-6 col-lg-3 mg-t-10 mg-sm-t-0">
-                    <div class="card card-status">
+                    <div class="card card-status ">
                         <a href="{{ route('addibc') }}">
                             <div class="media">
                                 <i class="fas fa-plus-circle dashboard_icon"></i>
@@ -142,7 +142,7 @@
                     </div><!-- card -->
                 </div><!-- col-3 -->
                 <div class="col-sm-6 col-lg-3 mg-t-10 mg-sm-t-0">
-                    <div class="card card-status">
+                    <div class="card card-status {{CheckCardDisabled('ibc_live')}}">
                         <a href="{{ route('live_ibc_voting') }}">
                             <div class="media">
                                 <i class="fas fa-chart-line dashboard_icon"></i>
@@ -154,7 +154,7 @@
                     </div><!-- card -->
                 </div><!-- col-3 -->
                 <div class="col-sm-6 col-lg-3 mg-t-10 mg-sm-t-0">
-                    <div class="card card-status">
+                    <div class="card card-status {{CheckCardDisabled('ibc_complete')}}">
                         <a href="{{ route('ibc_result') }}">
                             <div class="media">
                                 <i class="fas fa-file-alt dashboard_icon"></i>
@@ -174,7 +174,7 @@
             </div>
             <div class="row row-xs mb-4">
                 <div class="col-sm-6 col-lg-3 mg-t-10 mg-lg-t-0">
-                    <div class="card card-status">
+                    <div class="card card-status {{CheckCardDisabled('survey')}}">
                         <a href="{{ route('added_survey') }}">
                             <div class="media">
                                 <i class="fa fa-poll dashboard_icon"></i>
@@ -199,7 +199,7 @@
                     </div><!-- card -->
                 </div><!-- col-3 -->
                 <div class="col-sm-6 col-lg-3 mg-t-10 mg-lg-t-0">
-                    <div class="card card-status">
+                    <div class="card card-status {{CheckCardDisabled('survey_live')}}">
                         <a href="{{ route('live_survey') }}">
                             <div class="media">
                                 <i class="fas fa-chart-line dashboard_icon"></i>
@@ -212,7 +212,7 @@
                     </div><!-- card -->
                 </div><!-- col-3 -->
                 <div class="col-sm-6 col-lg-3 mg-t-10 mg-lg-t-0">
-                    <div class="card card-status">
+                    <div class="card card-status {{CheckCardDisabled('survey_complete')}}">
                         <a href="{{ route('survey_result') }}">
                             <div class="media">
                                 <i class="fas fa-file-alt dashboard_icon"></i>

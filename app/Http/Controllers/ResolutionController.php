@@ -11,7 +11,7 @@ use App\Resolutionsurvey;
 use App\Resolution_ans;
 use Session;
 use \Carbon\Carbon;
-use File, DB;
+use File, DB, Auth;
 use Illuminate\Http\Response;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -37,7 +37,15 @@ class ResolutionController extends Controller
 	}
 	public function getallibcvotingrow()
 	{
-		$data = DB::table('resolutions')->leftjoin('entities','entities.id','=','resolutions.entity')->select('resolutions.*','entities.entityname')->orderBy('resolutions.id', 'desc')->get();
+		$user = Auth::user();
+		$data = DB::table('resolutions')
+			->leftjoin('entities', 'entities.id', '=', 'resolutions.entity')
+			->select('resolutions.*', 'entities.entityname')
+			->when($user->role == 2, function ($query) use ($user) {
+				return $query->where('resolutions.user_id', $user->id);
+			})
+			->orderBy('resolutions.id', 'desc')
+			->get();
 
 		return response()->json($data);
 	}
@@ -48,7 +56,7 @@ class ResolutionController extends Controller
 		foreach ($getdata as $g) {
 			File::delete(public_path('resolution/' . $g['resolutiondetail']));
 		}
-		$data = Electionvotinguserdata::where('parent_id', $request->id)->where('type','ibcresolution')->delete();
+		$data = Electionvotinguserdata::where('parent_id', $request->id)->where('type', 'ibcresolution')->delete();
 		$data = Resolution_ans::where('ibcresolution_id', $request->id)->delete();
 
 		$data = Resolutionsurvey::where('resolutionid', $request->id)->delete();
@@ -67,6 +75,7 @@ class ResolutionController extends Controller
 		}
 
 		$data = Resolution::create([
+			'user_id' => Auth::user()->id,
 			'ibcid' => $newentityid,
 			'entity' => $request->entity,
 			'votingtype' => $request->votingtype,
@@ -103,35 +112,33 @@ class ResolutionController extends Controller
 	{
 		$insert_data = collect(json_decode($request->XL_row_object, TRUE));
 		$chunks = $insert_data->chunk(800);
-		foreach ($chunks as $chunk)
-		{
+		foreach ($chunks as $chunk) {
 			DB::table('electionvotinguserdatas')->insert($chunk->toArray());
 		}
-		$status=2;
-		if($request->election_status2)
-		{
-			$status=$request->election_status2;
+		$status = 2;
+		if ($request->election_status2) {
+			$status = $request->election_status2;
 		}
-		
+
 		Resolution::where('id', $request->parent_id)->update([
 			'status' => $status,
 		]);
 		$data = DB::table('electionvotinguserdatas')->where('type', 'ibcresolution')
-		->where('parent_id', $request->parent_id)->get();
+			->where('parent_id', $request->parent_id)->get();
 		return response()->json($data);
 	}
 
 	public function removevoterlistdata(Request $request)
 	{
 		$delete = Electionvotinguserdata::where('parent_id', $request->resolutionid)
-		->where('type','ibcresolution')->delete();
+			->where('type', 'ibcresolution')->delete();
 		return response()->json('success');
 	}
 	public function deletevoterlist(Request $request)
 	{
-		$delete = Electionvotinguserdata::where('id', $request->id)->where('type','ibcresolution')->delete();
+		$delete = Electionvotinguserdata::where('id', $request->id)->where('type', 'ibcresolution')->delete();
 		$data = Electionvotinguserdata::where('parent_id', $request->resolutionid)
-		->where('type','ibcresolution')->get();
+			->where('type', 'ibcresolution')->get();
 		return response()->json($data);
 	}
 
@@ -142,8 +149,7 @@ class ResolutionController extends Controller
 	}
 	public function updatesinglevoterlist(Request $request)
 	{
-		if($request->votermode=='insert')
-		{
+		if ($request->votermode == 'insert') {
 			$data = Electionvotinguserdata::create([
 				'type' => 'ibcresolution',
 				'entityid' => $request->entityid,
@@ -155,9 +161,7 @@ class ResolutionController extends Controller
 				'mobno' => $request->mobno,
 				'ratio' => $request->ratio,
 			]);
-		}
-		else
-		{
+		} else {
 			$data = Electionvotinguserdata::where('id', $request->id)->update([
 				'orgname' => $request->orgname,
 				'memname' => $request->memname,
@@ -165,13 +169,12 @@ class ResolutionController extends Controller
 				'email' => $request->email,
 				'mobno' => $request->mobno,
 				'ratio' => $request->ratio,
-			]);		
+			]);
 		}
 		$data = DB::table('electionvotinguserdatas')->where('parent_id', $request->resolutionid)
-		->where('type','ibcresolution')->get();
+			->where('type', 'ibcresolution')->get();
 
 		return response()->json($data);
-		
 	}
 	public function insertresolution(Request $request)
 	{
@@ -217,7 +220,7 @@ class ResolutionController extends Controller
 	{
 		$this->data['singledata'] = Resolution::find($request->id);
 		$this->data['entitydata'] = Entity::select('entityname', 'id')
-		->where('id', $this->data['singledata']->entity)->first();
+			->where('id', $this->data['singledata']->entity)->first();
 		//return response()->json($this->data['singledata']);
 		//exit();
 		return view('ibcvoting.editibcvoting', $this->data);
@@ -225,7 +228,7 @@ class ResolutionController extends Controller
 	public function getibcvoterdata(Request $request)
 	{
 		$data = DB::table('electionvotinguserdatas')->where('parent_id', $request->resolutionid)
-		->where('type','ibcresolution')->get();
+			->where('type', 'ibcresolution')->get();
 		return response()->json($data);
 	}
 	public function getibcresoultiondata(Request $request)
@@ -254,8 +257,8 @@ class ResolutionController extends Controller
 	}
 	public function getvoterlistedit(Request $request)
 	{
-		$getdata = DB::table('electionvotinguserdatas')->where('type','ibcresolution')
-		->where('parent_id', $request->resolutionid)->get();
+		$getdata = DB::table('electionvotinguserdatas')->where('type', 'ibcresolution')
+			->where('parent_id', $request->resolutionid)->get();
 		return response()->json($getdata);
 	}
 	public function getsingleeditresolution(Request $request)
@@ -269,11 +272,32 @@ class ResolutionController extends Controller
 		return view('excel');
 	}
 	public function live_ibc_voting(Request $request)
-	{       
-		if($request->ajax())
-		{
+	{
+		$user=Auth::user();
+		if ($request->ajax()) {
 			//follower_id as parent_follower,user_id as parent_user,
-			$data = DB::select("select e.id,e.ibcid,e.votestartdate,e.votestarttime,e.voteenddate,e.voteendtime,e.votingtitle,e.meetingtitle,e.meetingdate,(select count(*) from electionvotinguserdatas  where parent_id=e.id) as total_voter,(select count(*) from electionvotinguserdatas where electionvotinguserdatas.parent_id=e.id AND electionvotinguserdatas.ans_status=1) as voted from resolutions as e left join electionvotinguserdatas on e.id=electionvotinguserdatas.parent_id where e.status=4 Group By e.id order by  e.id desc");
+			$data = DB::table('resolutions as e')
+				->select(
+					'e.id',
+					'e.ibcid',
+					'e.votestartdate',
+					'e.votestarttime',
+					'e.voteenddate',
+					'e.voteendtime',
+					'e.votingtitle',
+					'e.meetingtitle',
+					'e.meetingdate',
+					DB::raw('(select count(*) from electionvotinguserdatas where parent_id = e.id) as total_voter'),
+					DB::raw('(select count(*) from electionvotinguserdatas where electionvotinguserdatas.parent_id = e.id AND electionvotinguserdatas.ans_status = 1) as voted')
+				)
+				->leftJoin('electionvotinguserdatas', 'e.id', '=', 'electionvotinguserdatas.parent_id')
+				->where('e.status', 4)
+				->when($user->role == 2, function ($query) use ($user) {
+					return $query->where('e.user_id', $user->id);
+				})
+				->groupBy('e.id')
+				->orderBy('e.id', 'desc')
+				->get();
 
 			//$data = DB::table('elections')->orderBy('id', 'desc')->where('status',3)->get();
 			return response()->json($data);
@@ -282,8 +306,8 @@ class ResolutionController extends Controller
 	}
 	public function send_remaining_ibc_voter_notification(Request $request)
 	{
-		$send_notification=DB::table('electionvotinguserdatas')->select('mobno')
-		->where('parent_id',$request->ibc_id)->where('ans_status','=',NULL)->get();
+		$send_notification = DB::table('electionvotinguserdatas')->select('mobno')
+			->where('parent_id', $request->ibc_id)->where('ans_status', '=', NULL)->get();
 		return response()->json($send_notification);
 	}
 
@@ -294,12 +318,12 @@ class ResolutionController extends Controller
 
 	public function view_ibc_result(Request $request)
 	{
-		$this->data['ibc_data']=Resolution::find($request->id);
-$this->data['ibc_que']=DB::table('resolutionsurveys')->where('resolutionid',$request->id)->get();
+		$this->data['ibc_data'] = Resolution::find($request->id);
+		$this->data['ibc_que'] = DB::table('resolutionsurveys')->where('resolutionid', $request->id)->get();
 
-		return view('ibcvoting.view_ibc_result',$this->data);
+		return view('ibcvoting.view_ibc_result', $this->data);
 	}
-	
+
 	public function get_ibc_que_ans(Request $request)
 	{
 		//$data=DB::table('')->where('resolutionid',$request->ibc_id)->get();
@@ -307,4 +331,3 @@ $this->data['ibc_que']=DB::table('resolutionsurveys')->where('resolutionid',$req
 		return response()->json($data);
 	}
 }
-

@@ -8,6 +8,18 @@ class Usermanage extends Model
 {
     //
 	protected $fillable = [
-		'username','password','email','regnew','regedit','regview','elecmake','elecedit','elecview','resmake','resedit','resview','surmake','suredit','surview',
+		'user_id',
+		'regnew',
+		'regedit',
+		'regview',
+		'elecmake',
+		'elecedit',
+		'elecview',
+		'resmake',
+		'resedit',
+		'resview',
+		'surmake',
+		'suredit',
+		'surview',
 	];
 }

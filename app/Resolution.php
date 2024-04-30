@@ -7,6 +7,19 @@ use Illuminate\Database\Eloquent\Model;
 class Resolution extends Model
 {
     //
-	protected $fillable = ['ibcid','entity','votingtype','votingtitle','votestartdate','voteenddate','votestarttime','voteendtime','meetingdate','status','resulttype','meetingtitle',];
-
+    protected $fillable = [
+        'user_id',
+        'ibcid',
+        'entity',
+        'votingtype',
+        'votingtitle',
+        'votestartdate',
+        'voteenddate',
+        'votestarttime',
+        'voteendtime',
+        'meetingdate',
+        'status',
+        'resulttype',
+        'meetingtitle',
+    ];
 }
