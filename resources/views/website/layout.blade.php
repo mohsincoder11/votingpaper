@@ -101,7 +101,7 @@
 .dropdown:hover .dropbtn {background-color: #ddd;}
 
 </style>
-
+@yield('css')
 <body>
 
     <div class="loader">
@@ -176,32 +176,40 @@
                             style="height:80px;">
                     </a>
                     <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
-                        <ul class="navbar-nav">
+                        @php
+                            $redirect_route=null;
+                        @endphp
+                        @if(\Request::route()->getName()!='home')
+                        @php
+                            $redirect_route= route('home') ;
+                        @endphp
+                        @endif
+                            <ul class="navbar-nav">
                             <li class="nav-item">
                                 <a href="{{ route('home') }}" class="nav-link dropdown-toggle active">Home</a>
 
                             </li>
                             <li class="nav-item">
-                                <a href="#about" class="nav-link dropdown-toggle">About us</a>
+                                <a href="{{$redirect_route}}#about" class="nav-link dropdown-toggle">About us</a>
 
                             </li>
 
                             <li class="nav-item">
-                                <a href="#client" class="nav-link" id="#client">Our Clients</a>
+                                <a href="{{$redirect_route}}#client" class="nav-link" id="#client">Our Clients</a>
                             </li>
                             <!-- <li class="nav-item">
-                                <a href="#demo">Demo </a>
+                                <a href="{{$redirect_route}}#demo">Demo </a>
 
                             </li> -->
                             <li class="nav-item">
-                                <a href="#work" class="nav-link">How It Work</a>
+                                <a href="{{$redirect_route}}#work" class="nav-link">How It Work</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#price" class="nav-link dropdown-toggle">Price</a>
+                                <a href="{{$redirect_route}}#price" class="nav-link dropdown-toggle">Price</a>
 
                             </li>
                             <li class="nav-item">
-                                <a href="#contact" class="nav-link">Contact</a>
+                                <a href="{{$redirect_route}}#contact" class="nav-link">Contact</a>
                             </li>
                             <!-- <li class="nav-item">
                                 <a href="" class="nav-link">Help</a>

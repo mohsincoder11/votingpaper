@@ -80,7 +80,7 @@ Route::group(['middleware' => ['Admin_logincheck']], function () {
     Route::get('survey-result', 'SurveyController@survey_result')->name('survey_result');
     Route::get('view-survey-result/{id}', 'SurveyController@view_survey_result')->name('view_survey_result');
 });
-
+ 
 Route::get('get_all_adminnotification', 'AdminController@get_all_adminnotification')->name('get_all_adminnotification');
 Route::get('delete_notification', 'AdminController@delete_notification')->name('delete_notification');
 Route::get('get_single_notification', 'AdminController@get_single_notification')->name('get_single_notification');

@@ -14,6 +14,7 @@
                 <h6 class="slim-pagetitle">Welcome back,{{ auth()->user()->name }} </h6>
             </div><!-- slim-pageheader --> --}}
 
+            @if (auth()->user()->role == 1 || auth()->user()->role == 2)
             <div class="row row-xs mt-4 mb-2">
                 <div class="col-sm-6 col-lg-3">
                     <h6 class="slim-pagetitle">Entity </h6>
@@ -50,6 +51,9 @@
 
 
             </div>
+            @else
+            <div class="mb-2"></div>
+            @endif
 
             <div class="row row-xs mb-2">
                 <div class="col-sm-6 col-lg-3">

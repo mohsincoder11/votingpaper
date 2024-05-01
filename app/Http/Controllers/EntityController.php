@@ -14,13 +14,13 @@ class EntityController extends Controller
 
     public function addentity(Request $request)
     {     // return env('MAIL_FROM_ADDRESS');
-        // if ($request->ajax()) {
-        //     $data = ([
-        //         'states' => DB::table('states')->get(),
-        //         'cities' => DB::table('cities')->where('state_id', 1)->get(),
-        //     ]);
-        //     return response()->json($data);
-        // }
+        if ($request->ajax()) {
+            $data = ([
+                'states' => DB::table('states')->get(),
+                'cities' => DB::table('cities')->where('state_id', 1)->get(),
+            ]);
+            return response()->json($data);
+        }
         return view('entity.add_entity');
     }
     public function addedentity()

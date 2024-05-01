@@ -20,6 +20,8 @@ class WebsiteController extends Controller
             'mobile_no' => 'required|unique:users|max:10|min:10',
             'country' => 'required',
             'org_name' => 'required',
+            'password' => 'required',
+            
 
         ];
 
@@ -41,8 +43,8 @@ class WebsiteController extends Controller
             'name' => $request->input('org_name'),
             'email' => $request->input('email'),
             'mobile_no' => $request->input('mobile_no'),
-            'password' => Hash::make(12345),
-            'role'=>2,
+            'role'=>$request->input('role'),
+            'password'=>Hash::make($request->input('password')),
 
         ]);
 
@@ -69,7 +71,7 @@ class WebsiteController extends Controller
             }
             return redirect()->back()->with('errors', $errors);
         }
-        $user = User::where('email', $request->email)
+        $user = User::where('email', $request->user_name)
             ->orWhere('user_name', $request->user_name)
             ->first();
         if ($user && Hash::check($request->password, $user->password)) {

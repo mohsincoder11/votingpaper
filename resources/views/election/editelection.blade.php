@@ -63,9 +63,9 @@
 					</div>
 					<h5 class="text-primary pt-2"><span id="ibcidlabel4"> </span></h5>
 
-					<div class="row pt-2">
-						<div class="col-lg-4">
-							<input type="hidden" value="1" id="createpollsubmit">
+					<div class="row pt-2">	
+												<input type="hidden" value="1" id="createpollsubmit">
+						                            @if (auth()->user()->role == 1 || auth()->user()->role == 2)<div class="col-lg-4">
 							<div class="form-group mg-b-10-force">
 								<label class="form-control-label">Select Entity <span class="tx-danger">*</span></label>
 								<select class="form-control select2-show-search" data-placeholder="Choose Entity" required="" name="entity" id="entity" >
@@ -77,7 +77,10 @@
 
 							</div>
 						</div><!-- col-4 -->
-						<div class="col-lg-4">
+					@else
+                                <input type="hidden" name="entity" id="entity" value="{{ Auth::id() }}">
+                            @endif	
+							<div class="col-lg-4">
 							<div class="form-group mg-b-10-force">
 								<label class="form-control-label">Select Voting Type <span class="tx-danger">*</span></label>
 								<select class="form-control selectpicker" data-placeholder="Choose country" required="" name="votingtype" id="votingtype">

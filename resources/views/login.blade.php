@@ -24,7 +24,7 @@
     <div class="signin-wrapper" style="margin-top: -10px">
 
         <div class="signin-box">
-            <h2 class="slim-logo"><a href="{{ url('dashboard') }}">Voting Paper<span>.</span></a></h2>
+            <h2 class="slim-logo"><a href="{{ route('home') }}">Voting Paper<span>.</span></a></h2>
             <h3 class="signin-title-primary">Welcome back!</h3>
             <h2 class="signin-title-secondary">Sign in to continue.</h2>
             <form id="form">
